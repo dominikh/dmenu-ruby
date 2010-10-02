@@ -73,7 +73,7 @@ class Dmenu
     end
 
     selection = items.find {|item|
-      item.key == value
+      item.key.to_s == value
     }
 
     return selection
