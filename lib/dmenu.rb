@@ -51,7 +51,6 @@ class Dmenu
   #   didn't make any selection (i.e. pressed ESC)
   def run
     command = "dmenu #{args}"
-    puts command
     pipe = IO.popen(command, "w+")
 
     items = @items.map {|item|
