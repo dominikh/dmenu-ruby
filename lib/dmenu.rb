@@ -56,6 +56,8 @@ class Dmenu
     items = @items.map {|item|
       if item.is_a?(Item)
         item
+      elsif item.is_a?(Array)
+        Item.new(item[0], item[1])
       else
         Item.new(item, item)
       end
