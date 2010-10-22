@@ -3,7 +3,7 @@ require "dmenu/item"
 
 # @example A simple menu
 #   menu = Dmenu.new
-#   menu.items = ["foo", "bar", Dmenu::Item.new("baz", 123)]
+#   menu.items = ["foo", "bar", Dmenu::Item.new("baz", 123), ['spam', 'eggs']]
 #
 #   menu.run # this will return a Dmenu::Item, according to what the user selected.
 class Dmenu
