@@ -73,6 +73,7 @@ class Dmenu
       return nil
     end
 
+    value.chomp!
     selection = items.find {|item|
       item.key.to_s == value
     }
