@@ -74,7 +74,7 @@ class Dmenu
     end
 
     selection = items.find {|item|
-      item.key.to_s == value
+      item.key.to_s.strip == value.strip
     }
 
     return selection
