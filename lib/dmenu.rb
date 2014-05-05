@@ -1,4 +1,3 @@
-require "shellwords"
 require "dmenu/item"
 
 # @example A simple menu
@@ -50,7 +49,6 @@ class Dmenu
   # @return [Item, nil] Returns the selected item or nil, if the user
   #   didn't make any selection (i.e. pressed ESC)
   def run
-    command = "dmenu #{args}"
     pipe = IO.popen(command, "w+")
 
     items = @items.map {|item|
@@ -81,19 +79,40 @@ class Dmenu
     return selection
   end
 
-  def args
-    args = []
-    args << "-b" if @position == :bottom
-    args << "-i" if @case_insensitive
-    args << "-l #@lines" if @lines > 1
-    args << "-fn " + Shellwords.escape(@font)  if @font
-    args << "-nb " + Shellwords.escape(@background) if @background
-    args << "-nf " + Shellwords.escape(@foreground) if @foreground
-    args << "-sb " + Shellwords.escape(@selected_background) if @selected_background
-    args << "-sf " + Shellwords.escape(@selected_foreground) if @selected_foreground
-    args << "-p " + Shellwords.escape(@prompt) if @prompt
+  private
 
-    args.join(" ")
+  def command
+    args = ["dmenu"]
+
+    if @position == :bottom
+      args << "-b"
+    end
+
+    if @case_insensitive
+      args << "-i"
+    end
+
+    if @lines > 1
+      args << "-l"
+      args << lines.to_s
+    end
+
+    h = {
+      "fn" => @font,
+      "nb" => @background,
+      "nf" => @foreground,
+      "sb" => @selected_background,
+      "sf" => @selected_foreground,
+      "p"  => @prompt,
+    }
+
+    h.each do |flag, value|
+      if value
+        args << "-#{flag}"
+        args << value
+      end
+    end
+
+    return args
   end
-  private :args
 end
