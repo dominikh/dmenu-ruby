@@ -2,7 +2,7 @@ require "dmenu/item"
 
 # @example A simple menu
 #   menu = Dmenu.new
-#   menu.items = ["foo", "bar", Dmenu::Item.new("baz", 123)]
+#   menu.items = ["foo", "bar", Dmenu::Item.new("baz", 123), ['spam', 'eggs']]
 #
 #   menu.run # this will return a Dmenu::Item, according to what the user selected.
 class Dmenu
@@ -54,6 +54,8 @@ class Dmenu
     items = @items.map {|item|
       if item.is_a?(Item)
         item
+      elsif item.is_a?(Array)
+        Item.new(item[0], item[1])
       else
         Item.new(item, item)
       end
