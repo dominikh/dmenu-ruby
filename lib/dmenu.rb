@@ -6,7 +6,7 @@ require "dmenu/item"
 #
 #   menu.run # this will return a Dmenu::Item, according to what the user selected.
 class Dmenu
-  VERSION = "0.0.2"
+  VERSION = "1.0.0"
 
   # @return [Array<#to_s, Item>] Items to display in the menu. Items
   #   that are not an instance of the {Item} class will transparently
